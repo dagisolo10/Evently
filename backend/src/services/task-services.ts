@@ -119,7 +119,14 @@ export async function getActiveTasks(id: string): ServiceResult<{ tasks: Task[] 
 
 export async function createTask(data: CreateTaskPayload): ServiceResult<{ task: Task }> {
     try {
+        const userId = getUserId();
         const { eventId, ...taskData } = data;
+
+        const event = await prisma.event.findFirst({
+            where: { id: eventId, userId },
+        });
+
+        if (!event) return { error: "Event not found or not in your list", code: 404 };
 
         const task = await prisma.task.create({
             data: {
@@ -182,19 +189,23 @@ export async function updateTask(data: UpdateTaskPayload): ServiceResult<{ task:
 
             if (!task) throw new Error("Task not found");
 
-            return await trx.task.update({
+            const updated = await trx.task.update({
                 where: {
                     id,
                     event: { id: data.eventId, userId },
                 },
                 data: updateData,
             });
-        });
 
-        await addActivity({
-            type: "TaskCompleted",
-            eventId: data.eventId,
-            message: `Milestone reached: ${data.title}`,
+            if (task.status !== "Done" && updated.status === "Done") {
+                await addActivity({
+                    type: "TaskCompleted",
+                    eventId: data.eventId,
+                    message: `Milestone reached: ${data.title}`,
+                });
+            }
+
+            return updated;
         });
 
         return { task: result };

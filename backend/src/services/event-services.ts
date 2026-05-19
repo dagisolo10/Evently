@@ -32,7 +32,7 @@ export async function createEvent(data: CreatePayload): ServiceResult<{ event: E
 
         const invalidDate = data.endDate.getTime() < data.startDate.getTime();
 
-        if (invalidDate) return { error: "End date can't be after start date.", code: 400 };
+        if (invalidDate) return { error: "End date can't be before start date.", code: 400 };
 
         const event = await prisma.event.create({
             data: {
@@ -194,7 +194,7 @@ export async function updateEvent(data: UpdatePayload): ServiceResult<{ event: E
         const result = await prisma.$transaction(async (trx) => {
             const invalidDate = data.endDate.getTime() < data.startDate.getTime();
 
-            if (invalidDate) throw new Error("End date can't be after start date.");
+            if (invalidDate) throw new Error("End date can't be before start date.");
 
             const { id, ...updateData } = data;
 

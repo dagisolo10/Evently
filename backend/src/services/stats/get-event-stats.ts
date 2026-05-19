@@ -64,13 +64,7 @@ export async function getEventStats(id: string): ServiceResult<EventStats> {
             },
         });
 
-        const taskQuery = prisma.task.count({
-            where: {
-                event: { id, userId },
-            },
-        });
-
-        const [totalBudget, totalVendorCost, totalVendorPaid, eventVendors, totalTasks, completedTasks, pendingTasks, tasksCount] = await prisma.$transaction([
+        const [totalBudget, totalVendorCost, totalVendorPaid, eventVendors, totalTasks, completedTasks, pendingTasks] = await prisma.$transaction([
             totalBudgetQuery,
             totalVendorCostQuery,
             totalVendorPaidQuery,
@@ -78,7 +72,6 @@ export async function getEventStats(id: string): ServiceResult<EventStats> {
             totalTasksQuery,
             completedTasksQuery,
             pendingTasksQuery,
-            taskQuery,
         ]);
 
         const budget = totalBudget._sum.budget || 0;
@@ -99,7 +92,7 @@ export async function getEventStats(id: string): ServiceResult<EventStats> {
         const overdueVendorsCount = eventVendors.filter((vendor) => vendor.payments.reduce((acc, curr) => acc + curr.amount, 0) < vendor.cost && vendor.dueDate < new Date()).length;
 
         const paymentCompletion = totalContracted ? Math.min((totalPaidToVendor / totalContracted) * 100, 100) : 0;
-        const taskCompletion = tasksCount ? (completedTasksCount / tasksCount) * 100 : 0;
+        const taskCompletion = totalTasks ? (completedTasksCount / totalTasks) * 100 : 0;
 
         return {
             budget,

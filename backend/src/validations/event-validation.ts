@@ -10,6 +10,7 @@ export const createEventSchema = z.object({
             if (!description?.trim()) {
                 return null;
             }
+            return description;
         }),
     clientName: z.string().min(1, "Client name is required"),
     clientEmail: z.string().email("Invalid email").optional().nullable(),
