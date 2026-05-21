@@ -2,6 +2,8 @@ import { z } from "zod";
 
 export const createUserValidation = z.object({
     name: z.string().min(3, "Minimum length of 3 characters"),
-    email: z.string().email(),
-    company: z.string().optional(),
+});
+
+export const updateUserValidation = z.object({
+    name: z.string().min(3, "Minimum length of 3 characters").optional(),
 });
