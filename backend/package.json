@@ -6,6 +6,7 @@
     "scripts": {
         "dev": "bun --watch src/index.ts",
         "start": "bun run src/index.ts",
+        "build": "bun install",
         "sync": "bunx prisma db push && bunx prisma generate",
         "studio": "bunx prisma studio"
     },
