@@ -16,7 +16,7 @@ export default function EventsPage() {
     }
 
     return (
-        <main className="flex flex-col gap-10 pb-12">
+        <main className="flex flex-col gap-10">
             <div className="relative flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
                 <div className="bg-primary/5 pointer-events-none absolute -top-24 -left-24 hidden size-96 blur-[120px] dark:block" />
 

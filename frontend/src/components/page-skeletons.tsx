@@ -66,7 +66,7 @@ export function NavbarSkeleton() {
 
 function DashboardSkeleton() {
     return (
-        <div className="space-y-10 pb-12">
+        <div className="space-y-10 py-12">
             <header className="space-y-2">
                 <Skeleton className="h-10 w-96" />
                 <Skeleton className="h-4 w-64" />
@@ -113,7 +113,7 @@ function DashboardSkeleton() {
 
 function EventsSkeleton() {
     return (
-        <div className="flex flex-col gap-10 pb-12">
+        <div className="flex flex-col gap-10 py-12">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
                 <div className="space-y-2">
                     <Skeleton className="h-3 w-20" />
@@ -238,7 +238,7 @@ function EventDetailsSkeleton() {
 
 function EventFormSkeleton() {
     return (
-        <div className="space-y-8 pb-12">
+        <div className="space-y-8 py-12">
             <Skeleton className="h-10 w-48" />
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 {Array.from({ length: 6 }).map((_, i) => (
@@ -262,7 +262,7 @@ function EventFormSkeleton() {
 
 function EventPaymentsSkeleton() {
     return (
-        <div className="space-y-8 pb-12">
+        <div className="space-y-8 py-12">
             <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
                 <div className="space-y-1">
                     <div className="flex items-center gap-2">
@@ -370,7 +370,7 @@ function VendorDirectorySkeleton() {
 
 function FinanceSkeleton() {
     return (
-        <div className="space-y-8 pb-12">
+        <div className="space-y-8 py-12">
             <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
                 <div className="space-y-1">
                     <Skeleton className="h-9 w-64" />

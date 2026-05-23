@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import { featuresMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import type { LucideIcon } from "@/types/types";
 import {
@@ -22,6 +23,8 @@ import {
     Users,
     Wallet,
 } from "lucide-react";
+
+export const metadata = featuresMetadata;
 
 const sectionColorMap = {
     primary: {
@@ -337,7 +340,7 @@ const featureGroups = [
 
 export default function Features() {
     return (
-        <main className="mx-auto max-w-6xl space-y-32 pb-12">
+        <main className="space-y-32">
             <section className="flex flex-col items-center text-center">
                 <div className="bg-primary/5 pointer-events-none absolute -top-24 left-1/2 size-96 -translate-x-1/2 blur-[150px]" />
 

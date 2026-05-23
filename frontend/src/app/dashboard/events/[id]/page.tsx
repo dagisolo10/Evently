@@ -107,20 +107,17 @@ export default function EventDetailsPage() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                    <Link href={`/dashboard/events/${event.id}/vendors`}>
-                        <Button
-                            variant="outline"
-                            className="h-8 rounded-xl px-6 text-xs font-medium tracking-tight hover:bg-zinc-50 md:h-10 md:text-sm dark:hover:bg-zinc-900"
-                        >
+                    <Button variant="outline" asChild>
+                        <Link href={`/dashboard/events/${event.id}/vendors`}>
                             Vendors <ArrowUpRight className="size-4 opacity-50" />
-                        </Button>
-                    </Link>
+                        </Link>
+                    </Button>
 
-                    <Link href={`/dashboard/events/${event.id}/payments`}>
-                        <Button className="h-8 rounded-xl bg-zinc-900 px-6 text-xs font-medium tracking-tight text-white hover:bg-zinc-800 md:h-10 md:text-sm dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200">
+                    <Button className="h-8 rounded-xl bg-zinc-900 px-6 text-xs font-medium tracking-tight text-white hover:bg-zinc-800 md:h-10 md:text-sm dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200" asChild>
+                        <Link href={`/dashboard/events/${event.id}/payments`}>
                             Financial <ReceiptText className="size-4" />
-                        </Button>
-                    </Link>
+                        </Link>
+                    </Button>
 
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>

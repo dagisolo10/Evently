@@ -1,9 +1,15 @@
+import AuthButton from "@/components/auth-button";
 import ImagePreview from "@/components/others/image-preview";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { homeMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import type { LucideIcon } from "@/types/types";
-import { Show, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { SignUpButton } from "@clerk/nextjs";
 import { Calendar, CheckCircle2, Sparkles } from "lucide-react";
+import Link from "next/link";
+
+export const metadata = homeMetadata;
 
 const colorMap = {
     primary: {
@@ -23,26 +29,29 @@ const colorMap = {
     },
 };
 
-const navLinkStyle = cn(
-    "text-muted-foreground hover:text-foreground text-sm font-medium",
-    "relative flex items-center py-2 transition-colors",
-    "after:bg-foreground after:absolute after:inset-x-0 after:bottom-1 after:h-0.5",
-    "after:origin-left after:scale-x-0 after:rounded-full after:transition-transform after:duration-300 hover:after:scale-x-100",
-);
-
 export default function Home() {
     return (
         <main className="space-y-24">
-            <section className="flex flex-col items-center text-center">
-                <h1 className="font-poppins text-4xl leading-tight font-extrabold tracking-tight md:text-6xl">
-                    The Operating System for <br />
-                    <span className="from-primary bg-linear-to-r to-purple-600 bg-clip-text text-transparent">Flawless Events.</span>
-                </h1>
+            <section className="flex flex-col items-center gap-6">
+                <div className="text-center">
+                    <h1 className="font-poppins text-4xl leading-tight font-extrabold tracking-tight md:text-6xl">
+                        The Operating System for <br />
+                        <span className="from-primary bg-linear-to-r to-purple-600 bg-clip-text text-transparent">Flawless Events.</span>
+                    </h1>
 
-                <p className="text-muted-foreground my-4 max-w-10/12 text-sm tracking-tight md:max-w-2xl md:text-base">
-                    The unified workspace for modern event organizers. Synchronize your vendors, automate budget tracking, and command your timelines
-                    with a dashboard that works as hard as you do.
-                </p>
+                    <p className="text-muted-foreground mx-auto my-4 max-w-10/12 text-sm tracking-tight md:max-w-2xl md:text-base">
+                        The unified workspace for modern event organizers. Synchronize your vendors, automate budget tracking, and command your
+                        timelines with a dashboard that works as hard as you do.
+                    </p>
+                </div>
+
+                <div className="flex items-center justify-center gap-4">
+                    <AuthButton />
+
+                    <Button asChild size={"cta"} variant={"outline"}>
+                        <Link href="/features">Features</Link>
+                    </Button>
+                </div>
             </section>
 
             <ImagePreview />
@@ -86,8 +95,7 @@ export default function Home() {
                     />
                 </div>
             </section>
-
-            <footer className="flex flex-col items-center gap-6 pb-12 text-center">
+            <footer className="flex flex-col items-center gap-6 text-center">
                 <h2 className="font-poppins text-2xl leading-8 font-bold md:text-4xl">
                     Ready to organize your next <span className="text-primary">event like a pro?</span>
                 </h2>
@@ -95,16 +103,9 @@ export default function Home() {
                     Join hundreds of organizers who have simplified their workflow and reclaimed their time.
                 </p>
 
-                <Show when={"signed-out"}>
-                    <div className="flex items-center gap-8">
-                        <SignInButton mode="modal">
-                            <button className={cn(navLinkStyle, "text-foreground")}>Log In</button>
-                        </SignInButton>
-                        <SignUpButton mode="modal">
-                            <button className={cn(navLinkStyle, "text-foreground")}>Get Started</button>
-                        </SignUpButton>
-                    </div>
-                </Show>
+                <SignUpButton mode="modal">
+                    <Button size={"cta"}>Create your free account</Button>
+                </SignUpButton>
             </footer>
         </main>
     );

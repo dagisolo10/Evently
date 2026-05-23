@@ -11,12 +11,6 @@ export const getDaysRemaining = (date: string) => {
     return days > 0 ? days : 0;
 };
 
-export const getHoursRemaining = (date: string) => {
-    const diff = new Date(date).getTime() - new Date().getTime();
-    const hours = Math.ceil(diff / (1000 * 60 * 60 * 60 * 24));
-    return hours > 0 ? hours : 0;
-};
-
 export const getRemainingTime = (date: Date) => {
     const target = date.getTime();
     const now = new Date().getTime();

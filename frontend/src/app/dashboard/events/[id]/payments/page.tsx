@@ -38,7 +38,7 @@ export default function EventPayments() {
     }
 
     return (
-        <main className="space-y-8 pb-12">
+        <main className="space-y-8">
             <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
                 <div>
                     <div className="mb-1 flex items-center gap-2">

@@ -36,7 +36,7 @@ export default function Dashboard() {
     }
 
     return (
-        <div className="space-y-10 pb-12">
+        <div className="space-y-10">
             <header className="relative flex flex-col gap-2">
                 <div className="bg-primary/5 pointer-events-none absolute -top-24 -left-24 hidden size-96 blur-[120px] dark:block" />
                 <h1 className="font-poppins text-3xl tracking-tight md:text-5xl">

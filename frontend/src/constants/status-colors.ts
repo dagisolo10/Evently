@@ -12,7 +12,7 @@ export const paymentCompletionProgressBarColor = (paymentCompletion: number | un
     if (paymentCompletion >= 40) return "[&>div]:bg-amber-400";
     if (paymentCompletion > 0) return "[&>div]:bg-zinc-500";
 
-    return "[&>div]:bg-zinc-800"; // Zero
+    return "[&>div]:bg-zinc-800";
 };
 
 export const badgeColor = (isOverBudget: boolean, percentage: number) => {
@@ -26,7 +26,6 @@ export const badgeColor = (isOverBudget: boolean, percentage: number) => {
 };
 
 export const statusColors = {
-    // Event
     event: {
         Completed: "text-emerald-500",
         Ongoing: "text-amber-500",
@@ -44,7 +43,6 @@ export const statusColors = {
         Upcoming: "bg-blue-500",
     },
 
-    // Vendor
     vendor: {
         Paid: "bg-emerald-100 dark:bg-transparent text-emerald-600 border-emerald-300 dark:border-emerald-700",
         Pending: "bg-amber-100 dark:bg-transparent text-amber-600 border-amber-300 dark:border-amber-700",
@@ -57,7 +55,6 @@ export const statusColors = {
         Overdue: "[&>div]:bg-rose-500 text-rose-600 border-rose-300",
     },
 
-    // Task
     task: {
         Done: "text-emerald-500",
         Pending: "text-amber-500",
@@ -76,17 +73,15 @@ export const statusColors = {
         Urgent: "bg-rose-600",
         High: "bg-orange-600",
         Medium: "bg-amber-600",
-        Low: "bg-blue-6700",
+        Low: "bg-blue-600",
     },
 
-    // Payment
     paymentStatus: {
         Paid: "bg-emerald-100 dark:bg-transparent text-emerald-600 border-emerald-200 dark:border-emerald-800",
         Pending: "bg-amber-100 dark:bg-transparent text-amber-600 border-amber-200 dark:border-amber-800",
         Overdue: "bg-rose-100 dark:bg-transparent text-rose-600 border-rose-200 dark:border-rose-800",
     },
 
-    // Activity
     activityColors: {
         TaskCreated: "bg-blue-500/15 text-blue-500",
         TaskCompleted: "bg-emerald-500/15 text-emerald-400",

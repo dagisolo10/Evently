@@ -14,8 +14,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NavbarSkeleton } from "../page-skeletons";
-import NavigationUserMenu from "./user-menu";
 import Sidebar from "./sidebar";
+import NavigationUserMenu from "./user-menu";
 
 const publicLinks = [{ href: "/features", label: "Features" }];
 
@@ -39,7 +39,7 @@ const navLinkStyle = cn(
     "after:origin-left after:scale-x-0 after:rounded-full after:transition-transform after:duration-300 hover:after:scale-x-100",
 );
 
-export default function NewNavBar() {
+export default function NavBar() {
     const { isSignedIn, isLoaded } = useUser();
     const path = usePathname();
 

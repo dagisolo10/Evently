@@ -1,6 +1,5 @@
 import GlowCard from "../others/glow-card";
 
-import {} from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { LucideIcon } from "@/types/types";
 import { formatUSD } from "@/helper/helper-functions";

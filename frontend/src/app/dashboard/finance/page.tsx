@@ -37,7 +37,7 @@ export default function Budgeting() {
     const margin = stats?.margin ?? 0;
 
     return (
-        <main className="space-y-8 pb-12">
+        <main className="space-y-8">
             <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
                 <div>
                     <h1 className="font-poppins text-3xl tracking-tight md:text-5xl">
@@ -46,7 +46,7 @@ export default function Budgeting() {
                     <p className="text-muted-foreground text-sm font-medium">Manage inbound client payments and vendor payouts.</p>
                 </div>
 
-                <Button onClick={()=> setOpen(true)} variant={"outline"} className="font-poppins px-4 font-semibold">
+                <Button onClick={() => setOpen(true)} variant={"outline"} className="font-poppins px-4 font-semibold">
                     Process Payment
                 </Button>
 

@@ -8,7 +8,6 @@ import { paymentCompletionProgressBarColor } from "@/constants/status-colors";
 
 interface CardProp {
     icon: ReactNode;
-    // icon: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>> | LucideIcon;
     label?: string;
     value: number;
     paymentCompletion?: number;

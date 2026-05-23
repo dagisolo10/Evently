@@ -1,15 +1,14 @@
 import GlowCard from "../others/glow-card";
 
-import {} from "lucide-react";
-import type { LucideIcon } from "@/types/types";
 import { formatUSD } from "@/helper/helper-functions";
+import type { LucideIcon } from "@/types/types";
 
 interface CardProp {
     icon: LucideIcon;
     label: string;
     value: string | number;
     subValue?: string | number;
-    color: "blue" | "orange" | "emerald" | "red" | "indigo" | "rose"; // Extended types
+    color: "blue" | "orange" | "emerald" | "red" | "indigo" | "rose";
     isCurrency?: boolean;
 }
 
@@ -32,7 +31,9 @@ export default function StatCard({ icon: Icon, label, value, subValue, color = "
         <GlowCard color={styleParts[2] ?? ""}>
             <div className="relative z-10 flex flex-col gap-5">
                 <div className="flex items-center gap-3">
-                    <div className={`grid size-11 place-items-center rounded-xl border transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg ${styleParts[0]} ${styleParts[1]} bg-white dark:bg-zinc-950`}>
+                    <div
+                        className={`grid size-11 place-items-center rounded-xl border transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg ${styleParts[0]} ${styleParts[1]} bg-white dark:bg-zinc-950`}
+                    >
                         <Icon className="size-5" />
                     </div>
                     <span className="font-poppins text-[10px] font-bold tracking-[0.2em] text-zinc-400 uppercase">{label}</span>
