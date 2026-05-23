@@ -1,4 +1,3 @@
-export { useCreateUser } from "./use-user";
 export { useCreateEvent, useUpdateEvent, useDeleteEvent } from "./use-event";
 export { useAddPayment, useUpdatePayment, useDeletePayment } from "./use-payment";
 export { useCreateTask, useUpdateTask, useDeleteTask, useCompleteTask } from "./use-task";

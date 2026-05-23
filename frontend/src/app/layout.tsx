@@ -1,15 +1,15 @@
 import "./globals.css";
 
-import { cn } from "@/lib/utils";
-import type { Metadata } from "next";
-import { ThemeProvider } from "next-themes";
-import { ClerkProvider } from "@clerk/nextjs";
-import UserSync from "@/components/user-sync";
-import { Toaster } from "@/components/ui/sonner";
 import NewNavBar from "@/components/navbar/navbar";
 import QueryProvider from "@/components/query-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import UserSync from "@/components/user-sync";
+import { cn } from "@/lib/utils";
+import { ClerkProvider } from "@clerk/nextjs";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 import { Manrope, Playfair_Display, Poppins } from "next/font/google";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", weight: "300" });
@@ -66,15 +66,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     <QueryProvider>
                         <TooltipProvider>
                             <ThemeProvider attribute="class" enableSystem disableTransitionOnChange defaultTheme="dark">
-                                <main className="h-screen scrollbar-thin overflow-y-auto">
-                                    <div className="mx-auto max-w-11/12">
-                                        <NewNavBar />
-                                        <UserSync />
-                                        <div className="pt-12">{children}</div>
-                                        <Toaster position="top-center" />
-                                        <ReactQueryDevtools />
-                                    </div>
-                                </main>
+                                <UserSync>
+                                    <main className="h-screen scrollbar-thin overflow-y-auto">
+                                        <div className="mx-auto max-w-11/12">
+                                            <NewNavBar />
+                                            <div className="pt-12">{children}</div>
+                                            <Toaster position="top-center" />
+                                            <ReactQueryDevtools />
+                                        </div>
+                                    </main>
+                                </UserSync>
                             </ThemeProvider>
                         </TooltipProvider>
                     </QueryProvider>

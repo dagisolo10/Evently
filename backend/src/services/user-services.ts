@@ -1,48 +1,49 @@
 import prisma from "@/lib/prisma";
 import { getUserId } from "@/lib/request-context";
 import type { ServiceResult } from "@/types/response";
+import { clerkClient } from "@clerk/express";
 import type { User } from "@prisma/client";
-
-interface CreateUserPayload {
-    name: string;
-}
 
 interface UpdateUserPayload {
     name?: string;
 }
 
-export async function createUser(data: CreateUserPayload): ServiceResult<User> {
+export async function getUser(): ServiceResult<User> {
     try {
-        const userId = getUserId();
+        const id = getUserId();
 
-        const existing = await prisma.user.findUnique({
-            where: { id: userId },
+        const user = await prisma.user.findUnique({
+            where: {
+                id,
+            },
             include: {
                 events: true,
-                payments: true,
                 globalVendors: true,
+                payments: true,
             },
         });
 
-        if (existing) {
-            return existing;
+        if (!user) {
+            const clerkUser = await clerkClient.users.getUser(id);
+
+            const name = clerkUser.fullName ?? `${clerkUser.firstName ?? ""} ${clerkUser.lastName ?? ""}`.trim() ?? "User";
+
+            return prisma.user.create({
+                data: {
+                    id,
+                    name,
+                },
+                include: {
+                    events: true,
+                    payments: true,
+                    globalVendors: true,
+                },
+            });
         }
 
-        const user = await prisma.user.create({
-            data: {
-                id: userId,
-                ...data,
-            },
-            include: {
-                events: true,
-                payments: true,
-                globalVendors: true,
-            },
-        });
-
         return user;
-    } catch (err) {
-        console.error(err);
+    } catch (error) {
+        console.error(error);
         return {
             code: 500,
             error: "Internal server error",
@@ -80,35 +81,6 @@ export async function updateUser(data: UpdateUserPayload): ServiceResult<User> {
         return updatedUser;
     } catch (err) {
         console.error(err);
-        return {
-            code: 500,
-            error: "Internal server error",
-        };
-    }
-}
-
-export async function getUser(): ServiceResult<User> {
-    try {
-        const id = getUserId();
-
-        const user = await prisma.user.findUnique({
-            where: {
-                id,
-            },
-            include: {
-                events: true,
-                globalVendors: true,
-                payments: true,
-            },
-        });
-
-        if (!user) {
-            return { error: "User not found", code: 404 };
-        }
-
-        return user;
-    } catch (error) {
-        console.error(error);
         return {
             code: 500,
             error: "Internal server error",

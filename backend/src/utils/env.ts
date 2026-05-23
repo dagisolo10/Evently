@@ -13,6 +13,8 @@ const env = {
     DATABASE_URL: requireEnv("DATABASE_URL"),
     FRONTEND_URL: requireEnv("FRONTEND_URL"),
     NODE_ENV: requireEnv("NODE_ENV") as "development" | "production",
+    CLERK_SECRET_KEY: requireEnv("CLERK_SECRET_KEY"),
+    CLERK_PUBLISHABLE_KEY: requireEnv("CLERK_PUBLISHABLE_KEY"),
 };
 
 export default env;

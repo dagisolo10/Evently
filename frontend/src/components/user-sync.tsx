@@ -1,19 +1,26 @@
 "use client";
 
-import { useCreateUser, useUpdateUser } from "@/hooks/use-user";
+import { useUpdateUser } from "@/hooks/use-user";
+import { syncUserQueryOptions } from "@/lib/query-options";
 import { useUser } from "@clerk/nextjs";
-import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, type ReactNode } from "react";
 
-export default function UserSync() {
+export default function UserSync({ children }: { children: ReactNode }) {
     const { user, isLoaded, isSignedIn } = useUser();
     const { mutate: updateUserMutate } = useUpdateUser();
-    const { mutate: createUserMutate } = useCreateUser();
+
+    const { data: dbUser } = useQuery(
+        syncUserQueryOptions({
+            enabled: isLoaded && isSignedIn,
+        }),
+    );
 
     useEffect(() => {
-        if (!isLoaded || !isSignedIn) return;
-        updateUserMutate({ name: user.fullName ?? "User" });
-        createUserMutate({ name: user?.fullName ?? "User" });
-    }, [createUserMutate, isLoaded, isSignedIn, updateUserMutate, user]);
+        if (dbUser && user?.fullName && dbUser.name !== user.fullName) {
+            updateUserMutate({ name: user.fullName });
+        }
+    }, [dbUser, updateUserMutate, user?.fullName]);
 
-    return null;
+    return children;
 }

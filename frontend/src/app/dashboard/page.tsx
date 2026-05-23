@@ -12,7 +12,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { statusColors } from "@/constants/status-colors";
 import { getEventStatus } from "@/helper/get-status";
 import { formatDate, formatUSD } from "@/helper/helper-functions";
-import { dashboardStatsQueryOptions, eventsQueryOptions, userQueryOptions } from "@/lib/query-options";
+import { dashboardStatsQueryOptions, eventsQueryOptions, syncUserQueryOptions } from "@/lib/query-options";
 import { cn } from "@/lib/utils";
 import type { DashboardStats } from "@/types/models/stats";
 import type { LucideIcon } from "@/types/types";
@@ -23,7 +23,7 @@ import Link from "next/link";
 
 export default function Dashboard() {
     const queries = useQueries({
-        queries: [userQueryOptions(), eventsQueryOptions(), dashboardStatsQueryOptions()],
+        queries: [syncUserQueryOptions(), eventsQueryOptions(), dashboardStatsQueryOptions()],
     });
 
     const user = queries[0].data;
