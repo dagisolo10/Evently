@@ -1,25 +1,26 @@
-import cors from "cors";
-import env from "@/utils/env";
-import express from "express";
-import taskRoutes from "@/routes/task-route";
-import userRoutes from "@/routes/user-route";
-import eventRoutes from "@/routes/event-route";
-import statsRoutes from "@/routes/stats-route";
-import { clerkMiddleware } from "@clerk/express";
 import errorMiddleWare from "@/middlewares/error";
-import paymentRoutes from "@/routes/payment-route";
+import eventRoutes from "@/routes/event-route";
 import eventVendorRoutes from "@/routes/event-vendor-route";
 import globalVendorRoutes from "@/routes/global-vendor-route";
+import paymentRoutes from "@/routes/payment-route";
+import statsRoutes from "@/routes/stats-route";
+import taskRoutes from "@/routes/task-route";
+import userRoutes from "@/routes/user-route";
+import env from "@/utils/env";
+import { clerkMiddleware } from "@clerk/express";
+import cors from "cors";
+import express from "express";
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({ origin: [env.FRONTEND_URL, "http://localhost:3001"], credentials: true }));
+app.use(cors({ origin: [env.FRONTEND_URL, "http://localhost:3001"], credentials: false }));
 
 app.use(clerkMiddleware({ clockSkewInMs: 60000 }));
 
+app.get("/", (_, res) => res.json({ status: "OK", service: "Evently Backend" }));
 app.get("/health", (_, res) => res.json({ status: "OK", timestamp: new Date().toISOString() }));
 
 app.use("/api/users", userRoutes);
