@@ -21,7 +21,16 @@ app.use(cors({ origin: [env.FRONTEND_URL, "http://localhost:3001"], credentials:
 app.use(clerkMiddleware({ clockSkewInMs: 60000 }));
 
 app.get("/", (_, res) => res.json({ status: "OK", service: "Evently Backend" }));
-app.get("/health", (_, res) => res.json({ status: "OK", timestamp: new Date().toISOString() }));
+app.get("/health", (_, res) => {
+    console.log("LOGGING FOR DEBUGGING:");
+    console.log("Is DATABASE_URL present?:", process.env["DATABASE_URL"]);
+    console.log("Is FRONTEND_URL present?:", process.env["FRONTEND_URL"]);
+
+    res.json({
+        status: "OK",
+        timestamp: new Date().toISOString(),
+    });
+});
 
 app.use("/api/users", userRoutes);
 app.use("/api/events", eventRoutes);
